@@ -8,14 +8,23 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
         if($data['statut'] == 1){
             $statut =' <span class="btn-success-light bradius mystat">Disponible</span>';
         }elseif($data['statut'] == 2){
-            $statut =' <span class="btn-danger-light bradius mystat">Refusé</span>'; 
+            $statut =' <span class="btn-danger-light bradius mystat">Refusé</span>';
         }else{
             $statut =' <span class="btn-warning-light bradius mystat">En attente</span>';
         }
-   
-   $nom = html_entity_decode(stripslashes($data['nom'])).' '.html_entity_decode(stripslashes($data['prenom'])).'<br><small>'.$data['dial_phone'].''.$data['phone'].'</small>';
-   $imag ='<img src="'.$domaine.'/uploads/'.$data['photo'].'" class="rounded-img"> ';
-        $action = '<a href="'.$domaine_admin.'/inscrits/'.$data['slug'].'" class="btn-info-light bradius mystat"> <i class="fa fa-eye"></i> voir </a>';
+        if($data['etat'] == 1){
+            $pay =' <span class="btn-success-light bradius mystat">Payé</span>';
+        }else{
+            $pay =' <span class="btn-danger-light bradius mystat">Non Payé</span>';
+        }
+
+        $nom = html_entity_decode(stripslashes($data['nom'])).' '.html_entity_decode(stripslashes($data['prenom'])).'<br><small>'.$data['dial_phone'].''.$data['phone'].'</small>';
+        $imag ='<img src="'.$domaine.'/uploads/'.$data['photo'].'" class="rounded-img"> ';
+        $action = '<a href="'.$domaine_admin.'/inscrits/'.$data['slug'].'" class="btn-info-light bradius mystat"> <i class="fa fa-eye"></i> voir </a>
+        <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="suppr('.$data['id_carte'].')">
+                                            <span class="fe fe-trash-2"> </span>
+                                        </a>
+        ';
 
 
         $arr_list['data'][] = array(
@@ -24,6 +33,7 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
             $nom,
             village_name($data['village']),
             html_entity_decode(stripslashes($data['niveau'])),
+            $pay,
             $statut,
             $action
         );

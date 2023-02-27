@@ -26,6 +26,16 @@ class Carte {
 
         return $rs;
     }
+    public function getCarteById($id){
+        $query = "SELECT * FROM carte
+        WHERE id_carte = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+
+        return $rs;
+    }
 
 
 // Count
@@ -66,10 +76,24 @@ class Carte {
         return $nb;
 
     }
-    // Delete
-    public function deleteUser($id){
+    public function updateEtat($etat,$id){
+        $query = "UPDATE carte
+            SET etat = :etat
+            WHERE id_carte = :id ";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "etat" => $etat,
+            "id" => $id
+        ));
 
-        $query = "DELETE  FROM membre WHERE id_membre  = :id";
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
+    // Delete
+    public function deleteCarte($id){
+
+        $query = "DELETE  FROM carte WHERE id_carte  = :id";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "id" => $id
@@ -98,40 +122,12 @@ class Carte {
     // update
 
 
-    public function updateAdminPhoto($photo,$id){
-        $query = "UPDATE admin
-            SET photo = :photo
-            WHERE id_admin = :id ";
-        $rs = $this->bdd->prepare($query);
-        $rs->execute(array(
-            "photo" => $photo,
-            "id" => $id
-        ));
-
-        $nb = $rs->rowCount();
-        return $nb;
-
-    }
-
-    public function updateData($propriete,$val,$id){
-        $query = "UPDATE admin
-            SET $propriete = :val
-            WHERE id_admin = :id";
-        $rs = $this->bdd->prepare($query);
-        $rs->execute(array(
-            "val" => $val,
-            "id" => $id
-        ));
-
-        $nb = $rs->rowCount();
-        return $nb;
-    }
 
 
     public function updateData2($propriete1,$val1,$propriete2,$val2,$id){
-        $query = "UPDATE admin
+        $query = "UPDATE carte
             SET $propriete1 = :val1, $propriete2 = :val2
-            WHERE id_admin = :id";
+            WHERE id_carte = :id";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "val1" => $val1,

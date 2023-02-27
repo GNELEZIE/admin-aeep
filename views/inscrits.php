@@ -22,7 +22,7 @@ if(isset($doc[1]) and !isset($doc[2])){
     exit();
 }
 
-
+require_once 'controller/refuser-carte.php';
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
@@ -39,6 +39,22 @@ require_once 'layout/head.php'
     <div class="card">
         <div class="card-body" id="refreshData">
             <div class="row row-sm">
+                <div class="col-md-12">
+                    <?php if(!empty($errors)){ ?>
+                        <div class="alert alert-danger" style="font-size: 14px" role="alert">
+                            <?php foreach($errors as $error){ ?>
+                                <?php echo $error ?>
+                            <?php }?>
+                        </div>
+                    <?php }?>
+                    <?php if(!empty($success)){ ?>
+                        <div class="alert alert-success" style="font-size: 14px" role="alert">
+                            <?php foreach($success as $suc){ ?>
+                                <?php echo $suc ?>
+                            <?php }?>
+                        </div>
+                    <?php }?>
+                </div>
                 <div class="col-xl-5 col-lg-12 col-md-12">
                     <div class="row">
                         <div class="col-xl-12">
@@ -48,9 +64,14 @@ require_once 'layout/head.php'
                                     <?php
                                     if($dataCarte['statut'] != 1){
                                         ?>
-                                        <div class="btn-list mt-4">
-                                            <a href="javascript:void(0);" class="btn ripple btn-success me-2" onclick="valider(<?=$dataCarte['id_carte']?>)"><i class="fe fe-valid"> </i>Terminer</a>
-                                        </div>
+                                      <div class="row" style="padding-top: 20px">
+                                          <div class="col-md-6">
+                                              <a href="javascript:void(0);" class="btn ripple btn-success me-2" onclick="valider(<?=$dataCarte['id_carte']?>)"><i class="fe fe-valid"> </i>Terminer</a>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <a class="modal-effect btn btn-danger-light d-grid mb-3" data-bs-effect="effect-sign" data-bs-toggle="modal" href="#modaldemo8">Refuser</a>
+                                          </div>
+                                      </div>
                                     <?php
                                     }
                                     ?>
@@ -74,8 +95,8 @@ require_once 'layout/head.php'
                         <hr>
                         <div class=" mt-4">
                             <hr>
-                            <a href="javascript:void(0);" class="btn ripple btn-primary me-2" onclick="downloadFile('<?=$domaine.'/uploads/'.$dataCarte['photo']?>','<?='Photo-'.html_entity_decode(stripslashes($dataCarte['prenom']))?>')"><i class="fe fe-download"> </i> Télécharger la photo</a>
-                            <a href="javascript:void(0);" class="btn ripple btn-secondary"  onclick="downloadFile('<?=$domaine.'/uploads/'.$dataCarte['piece']?>','<?='Pièce-'.html_entity_decode(stripslashes($dataCarte['prenom']))?>')"><i class="fe fe-download"> </i> Télécharger la pièce</a>
+                            <a href="<?=$domaine.'/uploads/'.$dataCarte['photo']?>" class="btn ripple btn-primary me-2" target="_blank"><i class="fe fe-download"> </i> Télécharger la photo</a>
+                            <a href="<?=$domaine.'/uploads/'.$dataCarte['piece']?>" class="btn ripple btn-secondary" target="_blank"><i class="fe fe-download"> </i> Télécharger la pièce</a>
                         </div>
                     </div>
                 </div>
@@ -88,7 +109,28 @@ require_once 'layout/head.php'
 </div>
 </div>
 </div>
-
+<div class="modal fade" id="modaldemo8">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+        <div class="modal-content modal-content-demo">
+            <form id="refuserForm" method="post">
+                <div class="modal-header">
+                    <h6 class="modal-title">Motivation</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                 <div class="form-group">
+                     <textarea class="form-control input-style" name="message" id="message" rows="5" placeholder="Motif du rejet" required></textarea>
+                     <input type="hidden" name="user" id="user" value="<?=$dataCarte['id_carte']?>"/>
+                     <input type="hidden" class="form-control " name="formkey" value="<?= $token ?>">
+                 </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger">Refuser</button>
+                    <a href="#" class="btn btn-light" data-bs-dismiss="modal">Fermer</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <?php
 require_once 'layout/foot.php';
