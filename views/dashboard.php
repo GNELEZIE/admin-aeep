@@ -35,7 +35,7 @@ if($nbrt = $nbt->fetch()){
 }else{
     $nbrCarte = 0;
 }
-$mont = $nbrCarte *1000;
+$mont = $nbrCarte *50000;
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
@@ -55,7 +55,11 @@ require_once 'layout/head.php';
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="text-white">
+<<<<<<< HEAD
                                             <h2 class="mb-0 number-font"><?=$nbrTotalCarte?></h2>
+=======
+                                            <h2 class="mb-0 number-font"><?=$nbrCarte?></h2>
+>>>>>>> 30da3104572b50eeaf0ebc67e511dd535b4bd805
                                             <p class="text-white mb-0">Total inscrit</p>
                                         </div>
                                         <div class="ms-auto"> <i class="fa fa-eye text-white fs-30 me-2 mt-2"></i> </div>
@@ -97,7 +101,11 @@ require_once 'layout/head.php';
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="text-white">
+<<<<<<< HEAD
                                             <h2 class="mb-0 number-font"><?= number_format($mont,0,',',' ')?> CFA</h2>
+=======
+                                            <h2 class="mb-0 number-font"><?=$mont?> CFA</h2>
+>>>>>>> 30da3104572b50eeaf0ebc67e511dd535b4bd805
                                             <p class="text-white mb-0">Solde</p>
                                         </div>
                                         <div class="ms-auto"> <i class="fa fa-money text-white fs-30 me-2 mt-2"></i> </div>
@@ -241,11 +249,16 @@ require_once 'layout/foot.php';
 
 
 
-    function supprimer(id = null){
+    function suppr(id = null){
         if(id){
             swal({
+<<<<<<< HEAD
                     title: "Voulez vous supprimer le membre ?",
                     text: "L'action va supprimer le membre",
+=======
+                    title: "Voulez vous supprimer la carte ?",
+                    text: "L'action va supprimer la carte selectionnée.",
+>>>>>>> 30da3104572b50eeaf0ebc67e511dd535b4bd805
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
