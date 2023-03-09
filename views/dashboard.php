@@ -11,21 +11,27 @@ if(!isset($_SESSION['useraeep'])){
 
 $nbV = $carte->getNbAllCarteValid();
 if($nbrV = $nbV->fetch()){
-  $nbrCarteValid = $nbrV['nb'] ;
+    $nbrCarteValid = $nbrV['nb'] ;
 }else{
     $nbrCarteValid = 0;
 }
 
 $nbE = $carte->getNbAllCarteEnAttent();
 if($nbrE = $nbE->fetch()){
-  $nbrCarteE = $nbrE['nb'] ;
+    $nbrCarteE = $nbrE['nb'] ;
 }else{
     $nbrCarteE = 0;
 }
 
-$nbt = $carte->getNbAllCarte();
+$nbtotal = $carte->getNbAllCarte();
+if($nbrtto = $nbtotal->fetch()){
+    $nbrTotalCarte = $nbrtto['nb'] ;
+}else{
+    $nbrTotalCarte = 0;
+}
+$nbt = $carte->getNbAllByEtatCarte();
 if($nbrt = $nbt->fetch()){
-  $nbrCarte = $nbrt['nb'] ;
+    $nbrCarte = $nbrt['nb'] ;
 }else{
     $nbrCarte = 0;
 }
@@ -33,119 +39,121 @@ $mont = $nbrCarte *1000;
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
-require_once 'layout/head.php'
+require_once $controller.'/payer.php';
+require_once 'layout/head.php';
 ?>
 
 <div class="main-content app-content mt-0">
-<div class="side-app">
+    <div class="side-app">
 
-<div class="main-container container-fluid">
-<div class="row pt-5 mt-5">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
-        <div class="row">
-        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
-                <div class="card bg-secondary img-card box-secondary-shadow">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="text-white">
-                                <h2 class="mb-0 number-font"><?=$nbrCarte?></h2>
-                                <p class="text-white mb-0">Total inscrit</p>
+        <div class="main-container container-fluid">
+            <div class="row pt-5 mt-5">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                            <div class="card bg-secondary img-card box-secondary-shadow">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="text-white">
+                                            <h2 class="mb-0 number-font"><?=$nbrTotalCarte?></h2>
+                                            <p class="text-white mb-0">Total inscrit</p>
+                                        </div>
+                                        <div class="ms-auto"> <i class="fa fa-eye text-white fs-30 me-2 mt-2"></i> </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="ms-auto"> <i class="fa fa-eye text-white fs-30 me-2 mt-2"></i> </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                            <div class="card bg-warning img-card box-primary-shadow">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="text-white">
+                                            <h2 class="mb-0 number-font"><?=$nbrCarteE?></h2>
+                                            <p class="text-white mb-0">En attente</p>
+                                        </div>
+                                        <div class="ms-auto"> <i class="fa fa-user-o text-white fs-30 me-2 mt-2"></i> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                            <div class="card  bg-success img-card box-success-shadow">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="text-white">
+                                            <h2 class="mb-0 number-font"><?=$nbrCarteValid?></h2>
+                                            <p class="text-white mb-0">Disponible</p>
+                                        </div>
+                                        <div class="ms-auto"> <i class="fa fa-briefcase text-white fs-30 me-2 mt-2"></i> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                            <div class="card bg-info img-card box-info-shadow">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="text-white">
+                                            <h2 class="mb-0 number-font"><?= number_format($mont,0,',',' ')?> CFA</h2>
+                                            <p class="text-white mb-0">Solde</p>
+                                        </div>
+                                        <div class="ms-auto"> <i class="fa fa-money text-white fs-30 me-2 mt-2"></i> </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
-                <div class="card bg-warning img-card box-primary-shadow">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="text-white">
-                                <h2 class="mb-0 number-font"><?=$nbrCarteE?></h2>
-                                <p class="text-white mb-0">En attente</p>
-                            </div>
-                            <div class="ms-auto"> <i class="fa fa-user-o text-white fs-30 me-2 mt-2"></i> </div>
+            <div class="row">
+
+
+
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title fw-semibold">La liste des inscrits</h4>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-           
-            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
-                <div class="card  bg-success img-card box-success-shadow">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="text-white">
-                                <h2 class="mb-0 number-font"><?=$nbrCarteValid?></h2>
-                                <p class="text-white mb-0">Disponible</p>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table text-nowrap border-bottom" id="TableInscrits">
+                                    <thead>
+                                    <tr class="border-bottom">
+                                        <th class="wd-15p">Inscrit le</th>
+                                        <th class="wd-15p">Photo</th>
+                                        <th class="wd-15p">Nom</th>
+                                        <th class="wd-15p">Village</th>
+                                        <th class="wd-15p">Niveau</th>
+                                        <th class="wd-15p">Paiement</th>
+                                        <th class="wd-15p">Statut</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="ms-auto"> <i class="fa fa-briefcase text-white fs-30 me-2 mt-2"></i> </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-     
-            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
-                <div class="card bg-info img-card box-info-shadow">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="text-white">
-                                <h2 class="mb-0 number-font"><?=$mont?> CFA</h2>
-                                <p class="text-white mb-0">Solde</p>
-                            </div>
-                            <div class="ms-auto"> <i class="fa fa-money text-white fs-30 me-2 mt-2"></i> </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
     </div>
-</div>
-<div class="row">
-
-
-
-<div class="col-md-12">
-    <div class="card">
-        <div class="card-header">
-            <h4 class="card-title fw-semibold">La liste des inscrits</h4>
-        </div>
-        <div class="card-body">
-        <div class="table-responsive">
-                        <table class="table text-nowrap border-bottom" id="TableInscrits">
-                            <thead>
-                            <tr class="border-bottom">
-                                <th class="wd-15p">Inscrit le</th>
-                                <th class="wd-15p">Photo</th>
-                                <th class="wd-15p">Nom</th>
-                                <th class="wd-15p">Village</th>
-                                <th class="wd-15p">Niveau</th>
-                                <th class="wd-15p">Statut</th>
-                                <th class="text-center">Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-        </div>
-    </div>
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-</div>
 
 </div>
 </div>
@@ -158,7 +166,7 @@ require_once 'layout/head.php'
 require_once 'layout/foot.php';
 ?>
 <script>
-        var TableInscrits;
+    var TableInscrits;
     $(document).ready(function() {
 
         TableInscrits = $('#TableInscrits').DataTable({
@@ -214,7 +222,7 @@ require_once 'layout/foot.php';
             success: function(data){
 //                    alert(data.data_info);
                 if(data.data_info == "ok"){
-                    tableComment.ajax.reload(null,false);
+                    TableInscrits.ajax.reload(null,false);
                     $( "#here" ).load(window.location.href + " #here" );
                     $('.load').html('<i class=""></i>');
                     $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Commentaire modifié avec succès !</div>');
@@ -236,8 +244,8 @@ require_once 'layout/foot.php';
     function supprimer(id = null){
         if(id){
             swal({
-                    title: "Voulez vous supprimer le commentaire ?",
-                    text: "L'action va supprimer le commentaire",
+                    title: "Voulez vous supprimer le membre ?",
+                    text: "L'action va supprimer le membre",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -248,14 +256,12 @@ require_once 'layout/foot.php';
 
                 function(isConfirm){
                     if (isConfirm) {
-                        $.post('<?=$domaine_admin?>/controller/delete.comment.php', {id : id}, function (data) {
+                        $.post('<?=$domaine_admin?>/controle/carte.delete', {id : id}, function (data) {
                             if(data == "ok"){
+                                TableInscrits.ajax.reload(null,false);
                                 swal("Opération effectuée avec succès!","", "success");
-
-                                    $( "#here" ).load(window.location.href + " #here" );
-
                             }else{
-                                swal("Impossible de supprimer le commentaire!", "Une erreur s'est produite lors du traitement des données.", "error");
+                                swal("Impossible de supprimer le membre!", "Une erreur s'est produite lors du traitement des données.", "error");
                             }
                         });
                     }

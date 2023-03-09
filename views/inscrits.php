@@ -74,9 +74,9 @@ require_once 'layout/head.php'
                         <hr>
                         <div class=" mt-4">
                             <hr>
-                            <a href="javascript:void(0);" class="btn ripple btn-primary me-2" onclick="downloadFile('<?=$domaine.'/uploads/'.$dataCarte['photo']?>','<?='Photo-'.html_entity_decode(stripslashes($dataCarte['prenom']))?>')"><i class="fe fe-download"> </i> Télécharger la photo</a>
-                            <a href="javascript:void(0);" class="btn ripple btn-secondary"  onclick="downloadFile('<?=$domaine.'/uploads/'.$dataCarte['piece']?>','<?='Pièce-'.html_entity_decode(stripslashes($dataCarte['prenom']))?>')"><i class="fe fe-download"> </i> Télécharger la pièce</a>
-                        </div>
+                            <a href="<?=$domaine.'/uploads/'.$dataCarte['photo']?>" class="btn ripple btn-primary me-2" target="_blank"><i class="fe fe-download"> </i> Télécharger la photo</a>
+                            <a href="<?=$domaine.'/uploads/'.$dataCarte['piece']?>" class="btn ripple btn-secondary me-2" target="_blank"><i class="fe fe-download"> </i>  Télécharger la pièce</a>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -98,9 +98,12 @@ require_once 'layout/foot.php';
 
 <script>
     function downloadFile(url, fileName) {
-        fetch(url, { method: 'get', mode: 'no-cors', referrerPolicy: 'no-referrer' })
-            .then(res => res.blob())
-    .then(res => {
+        fetch(url, {
+            method: 'get',
+            mode: 'no-cors',
+            referrerPolicy: 'no-referrer'
+        })
+            .then(res => res.blob()).then( res => {
             const aElement = document.createElement('a');
         aElement.setAttribute('download', fileName);
         const href = URL.createObjectURL(res);
@@ -109,7 +112,7 @@ require_once 'layout/foot.php';
         aElement.click();
         URL.revokeObjectURL(href);
     });
-    };
+    }
     function valider(id = null){
         if(id){
             swal({

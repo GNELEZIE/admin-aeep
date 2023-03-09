@@ -12,10 +12,19 @@ class Carte {
     public function getAllCarte(){
         $query = "SELECT * FROM carte ORDER BY id_carte DESC";
         $rs = $this->bdd->query($query);
-
         return $rs;
     }
 
+    public function getCarteById($id){
+        $query = "SELECT * FROM carte
+        WHERE id_carte = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+
+        return $rs;
+    }
     public function getUserBySlug($slg){
         $query = "SELECT * FROM carte
         WHERE slug = :slg";
@@ -27,6 +36,19 @@ class Carte {
         return $rs;
     }
 
+    public function updateEtat($propriete1,$val1,$id){
+        $query = "UPDATE carte
+            SET $propriete1 = :val1 WHERE id_carte  = :id ";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "val1" => $val1,
+            "id" => $id
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
 
 // Count
     public function getNbAllCarteValid(){
@@ -39,6 +61,13 @@ class Carte {
     public function getNbAllCarteEnAttent(){
         $query = "SELECT COUNT(*) as nb FROM carte
                   WHERE statut = 0";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
+    public function getNbAllByEtatCarte(){
+        $query = "SELECT COUNT(*) as nb FROM carte
+                  WHERE etat = 1";
         $rs = $this->bdd->query($query);
 
         return $rs;
@@ -67,9 +96,9 @@ class Carte {
 
     }
     // Delete
-    public function deleteUser($id){
+    public function deleteCarte($id){
 
-        $query = "DELETE  FROM membre WHERE id_membre  = :id";
+        $query = "DELETE  FROM carte WHERE id_carte  = :id";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "id" => $id
