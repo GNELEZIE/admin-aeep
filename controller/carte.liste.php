@@ -13,25 +13,16 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
             $statut =' <span class="btn-warning-light bradius mystat">En attente</span>';
         }
         if($data['etat'] == 1){
-            $pay =' <span class="btn-success-light bradius mystat">Payé</span>';
+            $pay =' <span class="btn-success-light bradius mystat">Soldé</span>';
         }else{
-<<<<<<< HEAD
             $pay =' <span class="btn-danger-light bradius mystat">Impayé</span>';
         }
-   
-   $nom = html_entity_decode(stripslashes($data['nom'])).' '.html_entity_decode(stripslashes($data['prenom'])).'<br><small>'.$data['dial_phone'].''.$data['phone'].'</small>';
-   $imag ='<img src="'.$domaine.'/uploads/'.$data['photo'].'" class="rounded-img"> ';
-        $action = '<a href="'.$domaine_admin.'/inscrits/'.$data['slug'].'" class="btn-info-light bradius mystat"> <i class="fa fa-eye"></i> voir </a>
-        <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="supprimer('.$data['id_carte'].')">
-=======
-            $pay =' <span class="btn-danger-light bradius mystat">Non Payé</span>';
-        }
 
-        $nom = html_entity_decode(stripslashes($data['nom'])).' '.html_entity_decode(stripslashes($data['prenom'])).'<br><small>'.$data['dial_phone'].''.$data['phone'].'</small>';
+        $nom = html_entity_decode(stripslashes($data['nom'])).' '.html_entity_decode(stripslashes($data['prenom'])).'
+        <br><small>'.$data['phone'].'</small><br>'.html_entity_decode(stripslashes($data['niveau']));
         $imag ='<img src="'.$domaine.'/uploads/'.$data['photo'].'" class="rounded-img"> ';
-        $action = '<a href="'.$domaine_admin.'/inscrits/'.$data['slug'].'" class="btn-info-light bradius mystat"> <i class="fa fa-eye"></i> voir </a>
-        <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="suppr('.$data['id_carte'].')">
->>>>>>> 30da3104572b50eeaf0ebc67e511dd535b4bd805
+        $action = '<a href="'.$domaine_admin.'/inscrits/'.$data['slug'].'" class="btn-info-light bradius mystat" target="_blank"> <i class="fa fa-eye"></i> voir </a>
+        <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="supprimer('.$data['id_carte'].')">
                                             <span class="fe fe-trash-2"> </span>
                                         </a>
         ';
@@ -42,7 +33,6 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
             $imag,
             $nom,
             village_name($data['village']),
-            html_entity_decode(stripslashes($data['niveau'])),
             $pay,
             $statut,
             $action
