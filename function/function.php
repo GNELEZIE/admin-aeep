@@ -3,6 +3,13 @@
 
 //Pourcentage
 if(!function_exists('pourcentage')){
+    function pourcentageBruit($total, $nb){
+
+        $res = ($nb * 100)/$total;
+        return $res;
+    }
+}
+if(!function_exists('pourcentage')){
     function pourcentage($total, $nb){
 
         $res = ($nb * 100)/$total;
@@ -10,6 +17,8 @@ if(!function_exists('pourcentage')){
         return $resPourcen;
     }
 }
+
+
 if(!function_exists('village_name')){
     function village_name($villag){
         $village_nom = array(

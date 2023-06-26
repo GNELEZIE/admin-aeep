@@ -58,6 +58,18 @@ class Carte {
 
         return $rs;
     }
+
+        public function getNbAllCarteByVillage($val){
+        $query = "SELECT COUNT(*) as nb FROM carte
+                  WHERE statut = 1 AND village = :val";
+            $rs = $this->bdd->prepare($query);
+            $rs->execute(array(
+                "val" => $val
+            ));
+
+            return $rs;
+    }
+
     public function getNbAllCarteEnAttent(){
         $query = "SELECT COUNT(*) as nb FROM carte
                   WHERE statut = 0";
