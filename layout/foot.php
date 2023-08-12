@@ -29,9 +29,17 @@
 <script src="<?=$asset?>/plugins/chart/rounded-barchart.js"></script>
 <script src="<?=$asset?>/plugins/chart/utils.js"></script>
 <script src="<?=$asset?>/plugins/select2/select2.full.min.js"></script>
-<script src="<?=$asset?>/plugins/datatable/js/jquery.dataTables.min.js"></script>
-<script src="<?=$asset?>/plugins/datatable/js/dataTables.bootstrap5.js"></script>
-<script src="<?=$asset?>/plugins/datatable/dataTables.responsive.min.js"></script>
+
+
+<script src="<?=$asset?>/plugins/datatable/datatables.min.js"></script>
+<script src="<?=$asset?>/plugins/datatable/dataTables.buttons.min.js"></script>
+<script src="<?=$asset?>/plugins/datatable/jszip.min.js"></script>
+<script src="<?=$asset?>/plugins/datatable/pdfmake.min.js"></script>
+<script src="<?=$asset?>/plugins/datatable/vfs_fonts.js"></script>
+<script src="<?=$asset?>/plugins/datatable/buttons.html5.min.js"></script>
+<script src="<?=$asset?>/plugins/datatable/buttons.print.min.js"></script>
+
+
 <script src="<?=$asset?>/plugins/summernote/summernote1.js"></script>
 <script src="<?=$asset?>/js/summernote.js"></script>
 <script src="<?=$asset?>/js/apexcharts.js"></script>

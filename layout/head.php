@@ -23,6 +23,11 @@
 <link rel="stylesheet" href="<?=$asset?>/plugins/bootstrap-datepicker/css/datepicker.css" type="text/css"/>
 <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
 <link rel="stylesheet" href="<?=$asset?>/plugins/intltelinput/css/intlTelInput.min.css"/>
+<link rel="stylesheet" href="<?=$asset?>/plugins/libs/datatable/datatables.min.css">
+<link rel="stylesheet" href="<?=$asset?>/plugins/libs/datatable/buttons.dataTables.min.css">
+
+
+
 <style>
 .number-font{
     font-size: 17px !important;

@@ -4,7 +4,10 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
 
 
     $liste=$carte->getAllCarte();
+    $ran = 0;
+
     while($data = $liste->fetch()) {
+        $ran ++;
         if($data['statut'] == 1){
             $statut =' <span class="btn-success-light bradius mystat">Disponible</span>';
         }elseif($data['statut'] == 2){
@@ -29,6 +32,7 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
 
 
         $arr_list['data'][] = array(
+            $ran,
             date_fr($data['date_carte']),
             $imag,
             $nom,

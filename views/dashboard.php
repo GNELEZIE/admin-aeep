@@ -122,6 +122,7 @@ require_once 'layout/head.php';
                                 <table class="table text-nowrap border-bottom" id="TableInscrits">
                                     <thead>
                                     <tr class="border-bottom">
+                                        <th class="wd-15p">N°</th>
                                         <th class="wd-15p">Inscrit le</th>
                                         <th class="wd-15p">Photo</th>
                                         <th class="wd-15p">Nom</th>
@@ -176,6 +177,10 @@ require_once 'layout/foot.php';
                     token:"<?=$token?>"
                 }
             },
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             "ordering": false,
             "pageLength": 50,
             "language" : {
