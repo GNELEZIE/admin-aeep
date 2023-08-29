@@ -35,7 +35,8 @@ if($nbrt = $nbt->fetch()){
 }else{
     $nbrCarte = 0;
 }
-$mont = $nbrCarte *1000;
+/*$mont = $nbrCarte *1000;*/
+$mont = 0;
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
@@ -115,7 +116,7 @@ require_once 'layout/head.php';
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title fw-semibold">La liste des inscrits</h4>
+                            <h4 class="card-title fw-semibold">La liste des inscrits</h4> <a href="<?=$domaine_admin?>/facture" class="downl">Télécharger</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -182,7 +183,7 @@ require_once 'layout/foot.php';
                 'excel', 'pdf'
             ],
             "ordering": false,
-            "pageLength": 50,
+            "pageLength": 100,
             "language" : {
                 "sProcessing": "Traitement en cours ...",
                 "sLengthMenu": "Afficher _MENU_ lignes",

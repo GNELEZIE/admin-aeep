@@ -29,6 +29,17 @@
 
 
 <style>
+.downl{
+    margin-left: 7px;
+    color: #fff;
+    border-radius: 6px;
+    padding: 7px;
+    background: #ff5e00;
+}
+
+.downl:hover{
+    color: #ffffff !important;
+}
 .number-font{
     font-size: 17px !important;
 }
