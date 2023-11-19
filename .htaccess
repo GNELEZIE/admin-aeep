@@ -1,30 +1,18 @@
-# Active la réécriture d'URL :
+
 RewriteEngine On
-
-# RewriteCond %{SERVER_PORT} 80
-# RewriteRule ^(.*)$ https://ecoldecroshi.ci/$1 [R,L]
-
-# Si le fichiers demandé n'existe pas :
 RewriteCond %{REQUEST_FILENAME} !-f
-# Si le dossier demandé n'existe pas non plus :
 RewriteCond %{REQUEST_FILENAME} !-d
-# On redirige vers index.php
-
 RewriteRule . index.php [L]
-
 RewriteRule ^([^\.]+)$ $1.php
 
-##RewriteEngine On
-##Header add Access-Control-Allow-Origin "*"
-#Header add Access-Control-Allow-Origin "https://carte.aeep-pongala.com/"
-##Header add Access-Control-Allow-Origin: http://admin.aeek-kassere.com
+#En ligne
+
+#Header add Access-Control-Allow-Origin "https://admin.aeep-pongala.net/"
 #
 #RewriteCond %{SERVER_PORT} 80
-##RewriteRule ^(.*)$ https://www.aeek-kassere.com/$1 [R,L]
 #
-## Si le fichiers demandé n'existe pas :
 #RewriteCond %{REQUEST_FILENAME} !-f
-## Si le dossier demandé n'existe pas non plus :
+#
 #RewriteCond %{REQUEST_FILENAME} !-d
-## On redirige vers index.php
+#
 #RewriteRule ^.*$ /index.php [L,QSA]

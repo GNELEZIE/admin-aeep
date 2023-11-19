@@ -9,7 +9,7 @@
 <meta name="description" content="Admin aeek Kasséré">
 <meta name="author" content="Gnelezie Ouattara">
 
-<link rel="shortcut icon" type="image/x-icon" href="<?=$asset?>/media/icon.png" />
+<link rel="shortcut icon" type="image/x-icon" href="<?=$asset?>/media/icons.png" />
 
 <title>Dasboard – <?=ucfirst($page)?></title>
 
@@ -374,8 +374,8 @@ table tr:hover{
 
 
 <a class="logo-horizontal " href="<?=$domaine_admin?>">
-    <img src="<?=$asset?>/media/logos.png" class="header-brand-img desktop-logo" alt="logo">
-    <img src="<?=$asset?>/media/logos.png" class="header-brand-img light-logo1" alt="logo">
+    <img src="<?=$asset?>/media/LogoAeep.png" class="header-brand-img desktop-logo" alt="logo">
+    <img src="<?=$asset?>/media/LogoAeep.png" class="header-brand-img light-logo1" alt="logo">
 </a>
 
 <div class="d-flex order-lg-2 ms-auto header-right-icons">
@@ -433,7 +433,7 @@ table tr:hover{
     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
         <div class="drop-heading">
             <div class="text-center">
-                <h5 class="text-dark mb-0 fs-14 fw-semibold"><?=html_entity_decode(stripslashes($data['nom'])).' '.html_entity_decode(stripslashes($data['prenom']))?></h5>
+                <h5 class="text-dark mb-0 fs-14 fw-semibold"><?=html_entity_decode(stripslashes( $_SESSION['useraeep']['nom'])).' '.html_entity_decode(stripslashes( $_SESSION['useraeep']['prenom']))?></h5>
                 <small class="text-muted">Admin</small>
             </div>
         </div>

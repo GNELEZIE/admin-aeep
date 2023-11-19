@@ -14,6 +14,11 @@
                     class="side-menu__icon fe fe-home"></i><span
                     class="side-menu__label">Statitisque</span></a>
         </li>
+        <li class="slide">
+            <a class="side-menu__item <?php if($lien == 'reunion' || $lien == ''){echo 'current';} ;?>" data-bs-toggle="slide" href="<?=$domaine_admin?>/reunion"><i
+                    class="side-menu__icon fe fe-user"></i><span
+                    class="side-menu__label">Réunion</span></a>
+        </li>
 
 
 
