@@ -123,13 +123,10 @@ require_once 'layout/head.php';
                                 <table class="table text-nowrap border-bottom" id="TableInscrits">
                                     <thead>
                                     <tr class="border-bottom">
-                                        <th class="wd-15p">N°</th>
-                                        <th class="wd-15p">Inscrit le</th>
-                                        <th class="wd-15p">Photo</th>
-                                        <th class="wd-15p">Nom</th>
+                                        <th class="wd-15p">Date</th>
+                                        <th class="wd-15p">Nom & Prénom</th>
+                                        <th class="wd-15p">Téléphone</th>
                                         <th class="wd-15p">Village</th>
-                                        <th class="wd-15p">Paiement</th>
-                                        <th class="wd-15p">Statut</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                     </thead>
@@ -173,7 +170,7 @@ require_once 'layout/foot.php';
         TableInscrits = $('#TableInscrits').DataTable({
             "ajax":{
                 "type":"post",
-                "url":"<?=$domaine_admin?>/controle/carte.liste",
+                "url":"<?=$domaine_admin?>/controle/sortie-liste",
                 "data":{
                     token:"<?=$token?>"
                 }
@@ -245,8 +242,36 @@ require_once 'layout/foot.php';
     });
 
 
-
     function supprimer(id = null){
+        if(id){
+            swal({
+                    title: "Voulez vous supprimer le membre ?",
+                    text: "L'action va supprimer le membre sélectionné",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Oui, supprimer",
+                    cancelButtonText: "Non, annuler",
+                    closeOnConfirm: false
+                },
+
+                function(isConfirm){
+                    if (isConfirm) {
+                        $.post('<?=$domaine_admin?>/controle/sortie.delete', {id : id}, function (data) {
+                            if(data == "ok"){
+                                swal("Suppression effectuée avec succès!","", "success");
+                                TableInscrits.ajax.reload(null,false);
+                            }else{
+                                swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
+                            }
+                        });
+                    }
+                });
+        }else{
+            alert('actualise');
+        }
+    }
+    function supprimers(id = null){
         if(id){
             swal({
                     title: "Voulez vous supprimer le membre ?",

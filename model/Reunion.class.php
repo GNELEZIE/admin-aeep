@@ -5,6 +5,27 @@ class Reunion {
     }
 
 
+    public function inscritsForSortie(){
+        $query = "SELECT * FROM sortie ORDER BY id_sortie DESC";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
+    public function deleteSortie($id){
+
+        $query = "DELETE  FROM sortie WHERE id_sortie  = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
+
+
     public function getAllINscrits(){
         $query = "SELECT * FROM reunion ORDER BY id_reunion DESC";
         $rs = $this->bdd->query($query);
