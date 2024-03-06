@@ -12,7 +12,19 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
                                             <span class="fe fe-trash-2"> </span>
                                         </a>
                                     </div>';
-
+         if($data['etat'] == 0){
+             $eta = '<div class="btn-list text-center">
+                                        <a href="javascript:void(0);" id="bDel" class="btn  btn-sm btn-red-transparent">
+                                            Non
+                                        </a>
+                                    </div>';
+         }else{
+             $eta = '<div class="btn-list text-center">
+                                        <a href="javascript:void(0);" id="bDel" class="btn  btn-sm btn-green-transparent">
+                                            Oui
+                                        </a>
+                     </div>';
+         }
         $nom =  html_entity_decode(stripslashes($data['nom'])) .' '. html_entity_decode(stripslashes($data['prenom']));
         $phone =  $data['phone'];
         $arr_list['data'][] = array(
@@ -20,6 +32,7 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
             $nom,
             $phone,
             html_entity_decode(stripslashes($data['village'])),
+            $eta,
             $action
 
 

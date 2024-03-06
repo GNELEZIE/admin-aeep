@@ -17,13 +17,15 @@ $function = 'function';
 $mail = 'mail';
 $layout = 'layout';
 
-//Include Connexion
+//Include Connexion controle/
 include_once 'model/Connexion.class.php';
 include_once 'model/Reunion.class.php';
+include_once 'controller/payer-sortie.php';
 
 // appelle des class
 include_once 'model/Admin.class.php';
 include_once 'model/Carte.class.php';
+
 
 
 

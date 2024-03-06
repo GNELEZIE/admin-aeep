@@ -24,7 +24,19 @@ class Reunion {
         return $nb;
 
     }
+    public function updateEtatSortie($propriete1,$val1,$id){
+        $query = "UPDATE sortie
+            SET $propriete1 = :val1 WHERE id_sortie  = :id ";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "val1" => $val1,
+            "id" => $id
+        ));
 
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
 
     public function getAllINscrits(){
         $query = "SELECT * FROM reunion ORDER BY id_reunion DESC";

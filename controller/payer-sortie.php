@@ -1,6 +1,6 @@
 <?php
 
-$list = $carte->getAllCarte();
+$list = $reunion->inscritsForSortie();
 $propriete ='etat';
 
 while($data = $list->fetch()){
@@ -16,9 +16,9 @@ while($data = $list->fetch()){
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS =>'{
-        "apikey" : "1841878195633ffd186cad60.31947873",
+        "apikey" : "1822785962633ac60986b536.85899562",
         "transaction_id":"'.$id.'",
-        "site_id": "872975"
+        "site_id": "5868685"
 
 
     }',
@@ -36,7 +36,7 @@ while($data = $list->fetch()){
         $res = json_decode($response,true);
         if($res['message'] == 'SUCCES' OR $res['message'] == 'succes'){
             $etat = 1;
-            $upd = $carte->updateEtat($propriete,$etat,$data['id_carte']);
+            $upd = $reunion->updateEtatSortie($propriete,$etat,$data['id_sortie']);
         }
 
     }

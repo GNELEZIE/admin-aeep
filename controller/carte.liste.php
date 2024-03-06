@@ -3,7 +3,7 @@ $arr_list = array('data' => array());
 if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_POST['token']) and $_SESSION['myformkey'] == $_POST['token']){
 
 
-    $liste=$carte->getAllCarte();
+    $liste = $carte->getAllCarte();
     $ran = 0;
 
     while($data = $liste->fetch()) {
@@ -16,9 +16,9 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
             $statut =' <span class="btn-warning-light bradius mystat">En attente</span>';
         }
         if($data['etat'] == 1){
-            $pay =' <span class="btn-success-light bradius mystat">Soldé</span>';
+            $pay =' <span class="btn-success-light bradius mystat">Oui</span>';
         }else{
-            $pay =' <span class="btn-danger-light bradius mystat">Impayé</span>';
+            $pay =' <span class="btn-danger-light bradius mystat">Non</span>';
         }
 
         $nom = html_entity_decode(stripslashes($data['nom'])).' '.html_entity_decode(stripslashes($data['prenom'])).'

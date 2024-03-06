@@ -10,11 +10,11 @@
                     class="side-menu__label">Sortie détente</span></a>
         </li>
 
-<!--        <li class="slide">-->
-<!--            <a class="side-menu__item --><?php //if($lien == 'dashboard' || $lien == ''){echo 'current';} ;?><!--" data-bs-toggle="slide" href="--><?//=$domaine_admin?><!--/dashboard"><i-->
-<!--                    class="side-menu__icon fe fe-home"></i><span-->
-<!--                    class="side-menu__label">Liste des inscrits</span></a>-->
-<!--        </li>-->
+        <li class="slide">
+            <a class="side-menu__item <?php if($lien == 'carte' || $lien == ''){echo 'current';} ;?>" data-bs-toggle="slide" href="<?=$domaine_admin?>/carte"><i
+                    class="side-menu__icon fe fe-home"></i><span
+                    class="side-menu__label">Carte de membre</span></a>
+        </li>
         <li class="slide">
             <a class="side-menu__item <?php if($lien == 'statitisque' || $lien == ''){echo 'current';} ;?>" data-bs-toggle="slide" href="<?=$domaine_admin?>/statitisque"><i
                     class="side-menu__icon fe fe-home"></i><span

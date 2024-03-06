@@ -28,10 +28,12 @@ require_once 'layout/head.php'
                         <div class="card-body">
                             <div class="row row-sm">
                                 <div class="table-responsive">
-                                    <table class="table text-nowrap border-bottom" id="tableReunion">
+                                    <table class="table text-nowrap border-bottom" id="tableCarte">
                                         <thead>
                                         <tr class="border-bottom">
+                                            <th class="wd-15p">N°</th>
                                             <th class="wd-15p">Date</th>
+                                            <th class="wd-15p">Photo</th>
                                             <th class="wd-15p">Nom & Prénom</th>
                                             <th class="wd-15p">Téléphone</th>
                                             <th class="wd-15p">Village</th>
@@ -60,13 +62,13 @@ require_once 'layout/head.php'
 require_once 'layout/foot.php';
 ?>
 <script>
-    var tableReunion;
+    var tableCarte;
 
     $(document).ready(function() {
-        tableReunion = $('#tableReunion').DataTable({
+        tableCarte = $('#tableCarte').DataTable({
             "ajax":{
                 "type":"post",
-                "url":"<?=$domaine_admin?>/controle/sortie-liste",
+                "url":"<?=$domaine_admin?>/controle/carte.liste",
                 "data":{
                     token:"<?=$token?>"
                 }
@@ -117,7 +119,7 @@ require_once 'layout/foot.php';
                         $.post('<?=$domaine_admin?>/controle/sortie.delete', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Suppression effectuée avec succès!","", "success");
-                                tableReunion.ajax.reload(null,false);
+                                tableCarte.ajax.reload(null,false);
                             }else{
                                 swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
                             }
