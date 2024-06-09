@@ -79,6 +79,12 @@ class Reunion {
         $rs = $this->bdd->query($query);
         return $rs;
     }
+    public function nbSortie(){
+        $query = "SELECT COUNT(*) as nb FROM sortie
+                  WHERE etat = 1";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
 
 
 

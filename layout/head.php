@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="<?=$asset?>/plugins/intltelinput/css/intlTelInput.min.css"/>
 <link rel="stylesheet" href="<?=$asset?>/plugins/libs/datatable/datatables.min.css">
 <link rel="stylesheet" href="<?=$asset?>/plugins/libs/datatable/buttons.dataTables.min.css">
+<link rel="stylesheet" href="<?=$asset?>/plugins/snackbar/snackbar.min.css" type="text/css">
 
 
 
@@ -354,6 +355,31 @@ table tr:hover{
 .side-menu .side-menu__icon :hover {
     color: inherit !important;
 }
+
+#reponseForm .col-md-12, #reponseForm .col-md-6{
+    text-align: left !important;
+}
+
+#tableQuiz th, #tableQuiz td{
+    text-align: center !important;
+}
+
+.rep_txt{
+    text-align: left;
+}
+.text-left{
+    text-align: left !important;
+}
+.repo span{
+    font-size: 20px;
+}
+
+
+
+
+
+
+
 
 
 

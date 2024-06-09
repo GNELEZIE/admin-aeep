@@ -29,28 +29,18 @@ if($nbrtto = $nbtotal->fetch()){
 }else{
     $nbrTotalCarte = 0;
 }
-$mont = 0;
-$nbtotals = $reunion->nbSortie();
-if($nbrttosortie = $nbtotals->fetch()){
-    $nbrttosorties = $nbrttosortie['nb'] ;
-    $mont = $nbrttosorties*970;
-}else{
-    $nbrttosorties = 0;
-}
-
-
-
 $nbt = $carte->getNbAllByEtatCarte();
 if($nbrt = $nbt->fetch()){
     $nbrCarte = $nbrt['nb'] ;
 }else{
     $nbrCarte = 0;
 }
-//include_once $controller.'/payer-sortie.php';
+/*$mont = $nbrCarte *1000;*/
+include_once $controller.'/payer-sortie.php';
+$mont = 0;
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
-
 
 require_once 'layout/head.php';
 ?>
@@ -67,8 +57,8 @@ require_once 'layout/head.php';
                                 <div class="card-body">
                                     <div class="d-flex">
                                         <div class="text-white">
-                                            <h2 class="mb-0 number-font"><?=$nbrttosorties?></h2>
-                                            <p class="text-white mb-0">Inscrits pour la sortie</p>
+                                            <h2 class="mb-0 number-font"><?=$nbrTotalCarte?></h2>
+                                            <p class="text-white mb-0">Total inscrit</p>
                                         </div>
                                         <div class="ms-auto"> <i class="fa fa-eye text-white fs-30 me-2 mt-2"></i> </div>
                                     </div>
@@ -127,14 +117,13 @@ require_once 'layout/head.php';
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title fw-semibold">Les résultats du </h4>  <b>concours miss AEEP 2024</b>
+                            <h4 class="card-title fw-semibold">Les inscrits pour la sortie détente</h4> <a href="<?=$domaine_admin?>/facture" class="downl">Télécharger</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table text-nowrap border-bottom" id="TableInscrits">
                                     <thead>
                                     <tr class="border-bottom">
-                                        <th class="wd-15p">N°</th>
                                         <th class="wd-15p">Date</th>
                                         <th class="wd-15p">Nom & Prénom</th>
                                         <th class="wd-15p">Téléphone</th>
@@ -154,9 +143,21 @@ require_once 'layout/head.php';
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
     </div>
+
 </div>
 </div>
+
 </div>
 
 
@@ -164,8 +165,6 @@ require_once 'layout/head.php';
 <?php
 require_once 'layout/foot.php';
 ?>
-
-
 <script>
     var TableInscrits;
     $(document).ready(function() {
@@ -304,3 +303,4 @@ require_once 'layout/foot.php';
         }
     }
 </script>
+

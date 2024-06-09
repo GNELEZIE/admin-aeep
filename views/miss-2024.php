@@ -15,28 +15,25 @@ require_once 'layout/head.php'
 ?>
 
 
-
 <div class="main-content app-content mt-0">
     <div class="side-app">
         <div class="main-container container-fluid">
-            <div class="row mt-5">
-                <div class="col-xl-12 mt-5">
-                    <div class="card">
+                    <div class="card" style="margin-top: 112px !important;">
                         <div class="card-header" style="border-bottom: 0 !important;">
-                            <h2 class=" "><b>Les inscrits pour la sortie détente</b></h2>
+                            <h1 class=" "><b>Les résultats</b></h1>
                         </div>
                         <div class="card-body">
                             <div class="row row-sm">
                                 <div class="table-responsive">
-                                    <table class="table text-nowrap border-bottom" id="tableSortie">
+                                    <table class="table text-nowrap border-bottom" id="tableMiss">
                                         <thead>
                                         <tr class="border-bottom">
-                                            <th class="wd-15p">N°</th>
+                                            <th class="wd-15p">Rang</th>
                                             <th class="wd-15p">Date</th>
                                             <th class="wd-15p">Nom & Prénom</th>
                                             <th class="wd-15p">Téléphone</th>
                                             <th class="wd-15p">Village</th>
-                                            <th class="wd-15p">Payer</th>
+                                            <th class="wd-15p">Note</th>
                                             <th class="text-center">Actions</th>
                                         </tr>
                                         </thead>
@@ -47,8 +44,7 @@ require_once 'layout/head.php'
                                     </table>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
@@ -61,13 +57,13 @@ require_once 'layout/head.php'
 require_once 'layout/foot.php';
 ?>
 <script>
-    var tableSortie;
+    var tableMiss;
 
     $(document).ready(function() {
-        tableSortie = $('#tableSortie').DataTable({
+        tableMiss = $('#tableMiss').DataTable({
             "ajax":{
                 "type":"post",
-                "url":"<?=$domaine_admin?>/controle/sortie-liste",
+                "url":"<?=$domaine_admin?>/controle/miss-liste",
                 "data":{
                     token:"<?=$token?>"
                 }
@@ -118,7 +114,7 @@ require_once 'layout/foot.php';
                         $.post('<?=$domaine_admin?>/controle/sortie.delete', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Suppression effectuée avec succès!","", "success");
-                                tableSortie.ajax.reload(null,false);
+                                tableMiss.ajax.reload(null,false);
                             }else{
                                 swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
                             }

@@ -1,6 +1,6 @@
 <?php
 
-
+$dateGmt = gmdate('Y-m-d H:i');
 //Pourcentage
 if(!function_exists('pourcentage')){
     function pourcentageBruit($total, $nb){
