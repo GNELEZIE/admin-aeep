@@ -25,6 +25,7 @@ class Carte {
 
         return $rs;
     }
+
     public function getUserBySlug($slg){
         $query = "SELECT * FROM carte
         WHERE slug = :slg";

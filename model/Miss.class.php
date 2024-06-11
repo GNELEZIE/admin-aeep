@@ -5,11 +5,24 @@ class Miss {
     }
 
     // Read
-    public function getAllQuestion(){
-        $query = "SELECT * FROM miss ORDER BY id_miss DESC";
+    public function getAllMiss(){
+        $query = "SELECT * FROM miss ORDER BY note DESC";
         $rs = $this->bdd->query($query);
         return $rs;
     }
+    public function getMissBySlug($slg){
+        $query = "SELECT * FROM miss
+        WHERE slug = :slg";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "slg" => $slg
+        ));
+
+        return $rs;
+    }
+
+
+
 // Count
 
     public function getNbAllCarteEnAttent(){
@@ -21,10 +34,22 @@ class Miss {
     }
 
     // Update
+    public function updateData($propriete,$val,$id){
+        $query = "UPDATE miss
+            SET $propriete = :val
+            WHERE id_miss = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "val" => $val,
+            "id" => $id
+        ));
 
+        $nb = $rs->rowCount();
+        return $nb;
+    }
 
     // Delete
-    public function deleteQuestion($id){
+    public function deleteMiss($id){
 
         $query = "DELETE  FROM miss WHERE id_miss  = :id";
         $rs = $this->bdd->prepare($query);

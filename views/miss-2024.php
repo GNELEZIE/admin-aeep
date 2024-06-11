@@ -8,6 +8,23 @@ if(!isset($_SESSION['useraeep'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
+require_once 'controller/note-upd.php';
+
+if(isset($doc[0]) and !isset($doc[1])){
+
+}elseif(isset($doc[1]) and !isset($doc[2])){
+  $getMiss = $miss->getMissBySlug($doc[1]);
+   if($missData = $getMiss->fetch()){
+
+   }else{
+       header('location:'.$domaine_admin.'/error');
+       exit();
+   }
+}else{
+    header('location:'.$domaine_admin.'/error');
+    exit();
+}
+
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
@@ -18,36 +35,113 @@ require_once 'layout/head.php'
 <div class="main-content app-content mt-0">
     <div class="side-app">
         <div class="main-container container-fluid">
-                    <div class="card" style="margin-top: 112px !important;">
-                        <div class="card-header" style="border-bottom: 0 !important;">
-                            <h1 class=" "><b>Les résultats</b></h1>
+            <?php
+            if(isset($doc[1]) and !isset($doc[2])){
+               ?>
+                <div class="card" style="margin-top: 112px !important;">
+                    <div class="card-header" style="border-bottom: 0 !important;">
+                        <h1 class=" "><b><?= html_entity_decode(stripslashes($missData['nom']))?></b> </h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row row-sm">
+                           <div class="col-md-12">
+                               <div class="register-form">
+                                   <h1 class=" "><b>Note finale : <span class="color-red"><?= $missData['note']?> /10</span></b> </h1>
+                                   <form method="post" id="formQuiz">
+                                       <?php if(!empty($error_s)){ ?>
+                                           <div class="alert alert-danger" style="font-size: 14px" role="alert">
+                                               <?php foreach($error_s as $error){ ?>
+                                                   <?php echo $error ?>
+                                               <?php }?>
+                                           </div>
+                                       <?php }?>
+
+                                       <div class="row mt-3">
+                                           <div class="col-md-12">
+                                               <?php
+                                               $qs = $resultats->getMissById($missData['id_miss']);
+                                               while($qData = $qs->fetch()){
+                                                   ?>
+                                                   <fieldset class="" style="border: 3px dashed #ececf6; padding: inherit; margin-bottom: 10px">
+                                                       <legend><?= html_entity_decode(stripslashes($qData['quest_t']))?></legend>
+                                                       <?php
+                                                       $getRep = $reponses->getRepByQuId($qData['id_questions']);
+                                                       while($getRepData = $getRep->fetch()){
+                                                           $couleur ='';
+                                                           if($qData['rep_id'] == $getRepData['id_reponses']){
+                                                               if($qData['not_es'] == 2){
+                                                                   $couleur ='color-green blod';
+                                                               }else{
+                                                                   $couleur ='color-red blod';
+                                                               }
+                                                               $checked = 'checked';
+                                                           }else{
+                                                               $checked = '';
+                                                           }
+                                                           ?>
+                                                           <div class="form-group">
+                                                               <input type="checkbox" class="text-left" id="rp<?=$getRepData['id_reponses']?>" name="<?=$qData['id_questions']?>_rp_<?=$getRepData['id_reponses']?>" value="<?=$getRepData['point']?>" <?=$checked?> readonly >
+                                                               <label for="rp<?=$getRepData['id_reponses']?>" class="<?=$couleur?>"><?= html_entity_decode(stripslashes($getRepData['reponse_s']))?></label>
+                                                           </div>
+                                                       <?php
+                                                       }
+                                                       ?>
+                                                   </fieldset>
+                                               <?php
+                                               }
+                                               ?>
+
+                                           </div>
+
+                                       </div>
+
+
+
+                                       <div class="row mt-3">
+                                           <div class="col-md-4 offset-4 text-center">
+                                               <a href="<?=$domaine_admin?>/miss-2024" class="btn btn-primary"> <i class="fa fa-chevron-circle-left"></i> Retour </a>
+                                           </div>
+                                       </div>
+                                   </form>
+                               </div>
+                           </div>
                         </div>
-                        <div class="card-body">
-                            <div class="row row-sm">
-                                <div class="table-responsive">
-                                    <table class="table text-nowrap border-bottom" id="tableMiss">
-                                        <thead>
-                                        <tr class="border-bottom">
-                                            <th class="wd-15p">Rang</th>
-                                            <th class="wd-15p">Date</th>
-                                            <th class="wd-15p">Nom & Prénom</th>
-                                            <th class="wd-15p">Téléphone</th>
-                                            <th class="wd-15p">Village</th>
-                                            <th class="wd-15p">Note</th>
-                                            <th class="text-center">Actions</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
+                    </div>
                 </div>
-
-            </div>
+            <?php
+            }else{
+              ?>
+                <div class="card" style="margin-top: 112px !important;">
+                    <div class="card-header" style="border-bottom: 0 !important;">
+                        <h1 class=" "><b>Les résultats</b></h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row row-sm">
+                            <div class="table-responsive">
+                                <table class="table text-nowrap border-bottom" id="tableMiss">
+                                    <thead>
+                                    <tr class="border-bottom">
+                                        <th class="wd-15p">Rang</th>
+                                        <th class="wd-15p">Date</th>
+                                        <th class="wd-15p">Nom & Prénom</th>
+                                        <th class="wd-15p">Téléphone</th>
+                                        <th class="wd-15p">Village</th>
+                                        <th class="wd-15p">Note</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </div>
@@ -99,8 +193,8 @@ require_once 'layout/foot.php';
     function supprimer(id = null){
         if(id){
             swal({
-                    title: "Voulez vous supprimer le membre ?",
-                    text: "L'action va supprimer le membre sélectionné",
+                    title: "Voulez vous supprimer la candidate ?",
+                    text: "L'action va supprimer la candidate sélectionnée",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -111,7 +205,7 @@ require_once 'layout/foot.php';
 
                 function(isConfirm){
                     if (isConfirm) {
-                        $.post('<?=$domaine_admin?>/controle/sortie.delete', {id : id}, function (data) {
+                        $.post('<?=$domaine_admin?>/controle/miss.delete', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Suppression effectuée avec succès!","", "success");
                                 tableMiss.ajax.reload(null,false);

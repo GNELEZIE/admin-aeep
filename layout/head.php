@@ -374,13 +374,35 @@ table tr:hover{
     font-size: 20px;
 }
 
+.notes_g{
+    background: green;
+    color: #fff;
+    padding: 3px 9px;
+    border-radius: 6px;
+}
+
+.notes_b{
+    background: red;
+    color: #fff;
+    padding: 3px 9px;
+    border-radius: 6px;
+}
+
+input[type="checkbox"][readonly] {
+    pointer-events: none;
+}
 
 
+.color-red{
+    color: #ff0000 !important;
+}
 
-
-
-
-
+.color-green{
+    color: #008000 !important;
+}
+.blod{
+    font-weight: bold !important;
+}
 
 
 

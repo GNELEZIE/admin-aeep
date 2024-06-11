@@ -28,6 +28,7 @@ include_once 'model/Carte.class.php';
 include_once 'model/Question.class.php';
 include_once 'model/Reponse.class.php';
 include_once 'model/Miss.class.php';
+include_once 'model/Resultats.class.php';
 
 
 
