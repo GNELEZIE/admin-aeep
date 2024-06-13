@@ -25,7 +25,7 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
         while($getRepData = $getRep->fetch()){
             $n_b++;
 
-            $repo .= '<span>'.$n_b.'-'. html_entity_decode(stripslashes($getRepData['reponse_s'])).'</span><br>';
+            $repo .= '<span>'.$n_b.'-'. html_entity_decode(stripslashes($getRepData['reponse_s'])).' = '.$getRepData['point'].'</span><br>';
         }
         $reponsess = '<a class="badge bg-success rounded-pill" data-bs-effect="effect-sign" data-bs-toggle="modal"
                      data-id="'.$data["id_questions"].'"

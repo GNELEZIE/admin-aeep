@@ -52,7 +52,7 @@
 <!--<script src="--><?//=$asset?><!--/plugins/intl-tel-input-master/utils.js"></script>-->
 <!--<script src="--><?//=$asset?><!--/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>-->
 <!--<script src="--><?//=$asset?><!--/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>-->
-<!--<script src="--><?//=$asset?><!--/plugins/sidemenu/sidemenu.js"></script>-->
+<script src="<?=$asset?>/plugins/sidemenu/sidemenu.js"></script>
 <!--<script src="--><?//=$asset?><!--/js/index1.js"></script>-->
 <!--<script src="--><?//=$asset?><!--/js/themeColors.js"></script>-->
 <script src="<?=$asset?>/js/custom.js"></script>

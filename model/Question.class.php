@@ -23,6 +23,16 @@ class Questions {
 
 
     // Read
+    public function getQById($Qid){
+        $query = "SELECT * FROM questions
+        WHERE id_questions = :Qid";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "Qid" => $Qid
+        ));
+
+        return $rs;
+    }
     public function getAllQuestion(){
         $query = "SELECT * FROM questions ORDER BY id_questions DESC";
         $rs = $this->bdd->query($query);

@@ -8,7 +8,7 @@ if(!isset($_SESSION['useraeep'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
-
+//require_once 'controller/note-upd.php';
 $nbV = $carte->getNbAllCarteValid();
 if($nbrV = $nbV->fetch()){
     $nbrCarteValid = $nbrV['nb'] ;
@@ -55,79 +55,14 @@ $_SESSION['myformkey'] = $token;
 require_once 'layout/head.php';
 ?>
 
-<div class="main-content app-content mt-0">
-    <div class="side-app">
-
+<div class="main-content app-content  mt-5 pt-5">
+    <div class="side-app  mt-5 pt-5">
         <div class="main-container container-fluid pt-5 mt-5">
-            <div class="row pt-5 mt-5 pt-5">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
-                            <div class="card bg-secondary img-card box-secondary-shadow">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="text-white">
-                                            <h2 class="mb-0 number-font">0</h2>
-                                            <p class="text-white mb-0">Inscrits pour la sortie</p>
-                                        </div>
-                                        <div class="ms-auto"> <i class="fa fa-eye text-white fs-30 me-2 mt-2"></i> </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
-                            <div class="card bg-warning img-card box-primary-shadow">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="text-white">
-                                            <h2 class="mb-0 number-font">0</h2>
-                                            <p class="text-white mb-0">En attente</p>
-                                        </div>
-                                        <div class="ms-auto"> <i class="fa fa-user-o text-white fs-30 me-2 mt-2"></i> </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
-                            <div class="card  bg-success img-card box-success-shadow">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="text-white">
-                                            <h2 class="mb-0 number-font">0</h2>
-                                            <p class="text-white mb-0">Disponible</p>
-                                        </div>
-                                        <div class="ms-auto"> <i class="fa fa-briefcase text-white fs-30 me-2 mt-2"></i> </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
-                            <div class="card bg-info img-card box-info-shadow">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="text-white">
-                                            <h2 class="mb-0 number-font"><?= number_format($mont,0,',',' ')?> CFA</h2>
-                                            <p class="text-white mb-0">Solde</p>
-                                        </div>
-                                        <div class="ms-auto"> <i class="fa fa-money text-white fs-30 me-2 mt-2"></i> </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row">
-
-
-
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="fw-semibold">Les résultats du <b>concours miss AEEP 2024</b></h3>
+                            <h3 class="fw-semibold"><b>Concours miss AEEP 2024</b></h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -237,100 +172,3 @@ require_once 'layout/foot.php';
     }
 
 </script>
-
-<!--<script>-->
-<!---->
-<!--    $('#comentUpdForm').submit(function(e){-->
-<!--        e.preventDefault();-->
-<!--        $('.load').html('<i class="loader-btn"></i>');-->
-<!--        var value = document.getElementById('comentUpdForm');-->
-<!--        var form = new FormData(value);-->
-<!---->
-<!--        $.ajax({-->
-<!--            method: 'post',-->
-<!--            url: '--><?//=$domaine_admin?>///controller/update.comment.php',
-//            data: form,
-//            contentType:false,
-//            cache:false,
-//            processData:false,
-//            dataType: 'json',
-//            success: function(data){
-////                    alert(data.data_info);
-//                if(data.data_info == "ok"){
-//                    TableInscrits.ajax.reload(null,false);
-//                    $( "#here" ).load(window.location.href + " #here" );
-//                    $('.load').html('<i class=""></i>');
-//                    $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Commentaire modifié avec succès !</div>');
-//                }else if(data.data_info == ''){
-//
-//                }
-//                else {
-//                    $('.updError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification du commentaire</div>');
-//                }
-//            },
-//            error: function (error, ajaxOptions, thrownError) {
-//                alert(error.responseText);
-//            }
-//        });
-//    });
-//
-//
-//    function supprimer(id = null){
-//        if(id){
-//            swal({
-//                    title: "Voulez vous supprimer le membre ?",
-//                    text: "L'action va supprimer le membre sélectionné",
-//                    type: "warning",
-//                    showCancelButton: true,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "Oui, supprimer",
-//                    cancelButtonText: "Non, annuler",
-//                    closeOnConfirm: false
-//                },
-//
-//                function(isConfirm){
-//                    if (isConfirm) {
-//                        $.post('<?//=$domaine_admin?>///controle/sortie.delete', {id : id}, function (data) {
-//                            if(data == "ok"){
-//                                swal("Suppression effectuée avec succès!","", "success");
-//                                TableInscrits.ajax.reload(null,false);
-//                            }else{
-//                                swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
-//                            }
-//                        });
-//                    }
-//                });
-//        }else{
-//            alert('actualise');
-//        }
-//    }
-//    function supprimers(id = null){
-//        if(id){
-//            swal({
-//                    title: "Voulez vous supprimer le membre ?",
-//                    text: "L'action va supprimer le membre",
-//                    type: "warning",
-//                    showCancelButton: true,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "Oui, supprimer",
-//                    cancelButtonText: "Non, annuler",
-//                    closeOnConfirm: false
-//                },
-//
-//                function(isConfirm){
-//                    if (isConfirm) {
-//                        $.post('<?//=$domaine_admin?>///controle/carte.delete', {id : id}, function (data) {
-//                            if(data == "ok"){
-//                                TableInscrits.ajax.reload(null,false);
-//                                swal("Opération effectuée avec succès!","", "success");
-//                            }else{
-//                                swal("Impossible de supprimer le membre!", "Une erreur s'est produite lors du traitement des données.", "error");
-//                            }
-//                        });
-//                    }
-//                });
-//        }else{
-//            alert('actualise');
-//        }
-//    }
-//</script>

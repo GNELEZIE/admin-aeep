@@ -41,6 +41,31 @@ class Reponses {
         return $rs;
     }
 
+    public function getRepBiId($Rid){
+        $query = "SELECT * FROM reponses
+        WHERE id_reponses = :Rid";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "Rid" => $Rid
+        ));
+
+        return $rs;
+    }
+
+
+    public function getRepByQuId2($Qid,$miss_id){
+        $query = "SELECT * FROM reponses
+                  INNER JOIN resultats ON rep_id = id_reponses
+        WHERE question_id = :Qid AND miss_id =:miss_id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "Qid" => $Qid,
+            "miss_id" => $miss_id
+        ));
+
+        return $rs;
+    }
+
     public function nbRepByQuId($Qid){
         $query = "SELECT COUNT(*) as nb FROM reponses
         WHERE question_id = :Qid";

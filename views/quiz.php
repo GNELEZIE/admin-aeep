@@ -83,7 +83,7 @@ require_once 'layout/head.php'
         <div class="modal-content modal-content-demo">
             <form id="reponseForm" method="post">
                 <div class="modal-header">
-                    <h2 class="modal-title">Ajouter une réponse</h2>
+                    <h2 class="modal-title">Ajouter une réponse <span id="tes"></span></h2>
                     <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
@@ -92,14 +92,7 @@ require_once 'layout/head.php'
                             <label for="quest_id">La question</label>
 
                             <select name="quest_id" id="quest_id" class="form-control input-style" aria-hidden="true">
-                                <?php
-                                $qust = $questions->getAllQuestion();
-                                while($qustData = $qust->fetch()){
-                                    ?>
-                                    <option value="<?=$qustData['id_questions']?>"><?=html_entity_decode(stripslashes($qustData['quest_t']))?></option>
-                                <?php
-                                }
-                                ?>
+
                             </select>
                         </div>
                         <div class="col-md-12">
@@ -151,9 +144,28 @@ require_once 'layout/head.php'
 require_once 'layout/foot.php';
 ?>
 <script>
+
+
+
+    function chargOption(){
+        $.ajax({
+            type: 'post',
+            data: {
+                token: "<?=$token?>"
+            },
+            url: '<?=$domaine_admin?>/controle/getdatamiss',
+            dataType: 'json',
+            success: function(data){
+                $('#quest_id').html(data.option_data);
+            }
+        });
+    }
+
+
     var tableQuiz;
 
     $(document).ready(function() {
+        chargOption();
         tableQuiz = $('#tableQuiz').DataTable({
             "ajax":{
                 "type":"post",
@@ -233,10 +245,11 @@ require_once 'layout/foot.php';
             $.post('<?=$domaine_admin?>/controle/question.save', $value.serialize(), function (data) {
                 if(data == "ok"){
                     tableQuiz.ajax.reload(null,false);
+                    chargOption();
                     $('.quizLoad').html('');
                     $value[0].reset();
                     Snackbar.show({
-                        text: 'Opération effectuée avec succès.',
+                        text: 'Question ajoutée avec succès.',
                         pos: 'top-right',
                         backgroundColor: '#2ab57d',
                         actionText: '<i class="ri-checkbox-circle-line" style="color:#ffffff"></i>'
@@ -276,6 +289,7 @@ require_once 'layout/foot.php';
                         $.post('<?=$domaine_admin?>/controle/question.delete', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Suppression effectuée avec succès!","", "success");
+                                chargOption();
                                 tableQuiz.ajax.reload(null,false);
                             }else{
                                 swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");

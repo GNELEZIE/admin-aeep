@@ -405,7 +405,7 @@
 </div>
 
 
-<?php include_once 'sidebar.php' ; ?>
+<?php include_once 'sidebar.php'; ?>
 
 <div class="main-content app-content mt-0">
     <div class="side-app">

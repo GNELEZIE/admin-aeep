@@ -7,12 +7,12 @@ use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
 try {
     ob_start();
-    include dirname(__FILE__).'/../controller/facture.pdf.php';
+    include dirname(__FILE__).'/../controller/miss.pdf.php';
     $content = ob_get_clean();
 
     $html2pdf = new Html2Pdf('P', 'A4', 'fr');
     $html2pdf->writeHTML($content);
-    $html2pdf->output('.pdf');
+    $html2pdf->output($no_m.'.pdf');
 } catch (Html2PdfException $e) {
     $html2pdf->clean();
     $formatter = new ExceptionFormatter($e);

@@ -8,7 +8,7 @@ if(!isset($_SESSION['useraeep'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
-//require_once 'controller/note-upd.php';
+require_once 'controller/note-upd.php';
 
 if(isset($doc[0]) and !isset($doc[1])){
 
@@ -46,7 +46,7 @@ require_once 'layout/head.php'
                         <div class="row row-sm">
                             <div class="col-md-12">
                                 <div class="register-form">
-                                    <h1 class=" "><b>Note finale : <span class="color-red"><?= $missData['note']?> /10</span></b> </h1>
+                                    <h1 class=" "><b>Note finale : <span class="color-red"><?= $missData['note']?> </span></b> </h1>
                                     <form method="post" id="formQuiz">
                                         <?php if(!empty($error_s)){ ?>
                                             <div class="alert alert-danger" style="font-size: 14px" role="alert">
@@ -59,36 +59,35 @@ require_once 'layout/head.php'
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <?php
-                                                $qs = $resultats->getMissById_2($missData['id_miss']);
+                                                $qss = $resultats->getMissById_2($missData['id_miss']);
                                                 $nq = 0;
-                                                while($qDat_a = $qs->fetch()){
-                                                    $nq ++;
+                                                while($qDat_a = $qss->fetch()){
+                                                    $nq++;
                                                     $qData = $questions->getQById($qDat_a['q_id'])->fetch();
                                                     ?>
                                                     <fieldset class="" style="border: 3px dashed #ececf6; padding: inherit; margin-bottom: 10px">
-                                                        <legend><?= html_entity_decode(stripslashes($qData['quest_t']))?></legend>
+                                                        <legend><?= $nq.' - '. html_entity_decode(stripslashes($qData['quest_t']))?></legend>
                                                         <?php
-                                                        $getRep = $reponses->getRepByQuId2($qData['id_questions'],$missData['id_miss']);
-                                                        $couleur = '';
-                                                        $checked = '';
+                                                        $getRep = $reponses->getRepByQuId($qData['id_questions']);
                                                         while($getRepData = $getRep->fetch()){
-                                                            if($getRepData['checked'] == 1){
-                                                                if($getRepData['not_es'] == 2){
-                                                                    $couleur ='color-green blod';
-                                                                }else{
-                                                                    $couleur ='color-red blod';
+                                                            $couleur ='';
+                                                            $_Rep = $resultats->getMissByQId($getRepData['question_id']);
+                                                            while($_Repon = $_Rep->fetch()){
+                                                                if($_Repon['rep_id'] == $getRepData['id_reponses']){
+                                                                    $_Repons = $reponses->getRepBiId($getRepData['id_reponses'])->fetch();
+                                                                    if($_Repons['point'] == 2){
+                                                                        $couleur ='color-green blod';
+                                                                    }else{
+                                                                        $couleur ='color-red blod';
+                                                                    }
                                                                 }
-                                                                $checked = 'checked';
 
-                                                            }else{
-                                                                $checked = '';
-                                                                $couleur = '';
                                                             }
+
 
                                                             ?>
                                                             <div class="form-group">
-                                                                <input type="checkbox" class="text-left" id="rp<?=$getRepData['id_reponses']?>" name="<?=$qData['id_questions']?>_rp_<?=$getRepData['id_reponses']?>" value="<?=$getRepData['point']?>" <?=$checked?> readonly >
-                                                                <label for="rp<?=$getRepData['id_reponses']?>" class="<?=$couleur?>"><?= html_entity_decode(stripslashes($getRepData['reponse_s']))?></label>
+                                                                <p class="<?=$couleur?>"> - <?= html_entity_decode(stripslashes($getRepData['reponse_s']))?></p>
                                                             </div>
                                                         <?php
                                                         }
@@ -105,8 +104,11 @@ require_once 'layout/head.php'
 
 
                                         <div class="row mt-3">
-                                            <div class="col-md-4 offset-4 text-center">
+                                            <div class="col-md-2 text-center mb-3">
                                                 <a href="<?=$domaine_admin?>/miss-2024" class="btn btn-primary"> <i class="fa fa-chevron-circle-left"></i> Retour </a>
+                                            </div>
+                                            <div class="col-md-2 text-center mb-3">
+                                                <a href="<?=$domaine_admin?>/result/<?=$doc[1]?>" class="btn btn-success"> <i class="fa fa-download"></i> Télécharger </a>
                                             </div>
                                         </div>
                                     </form>

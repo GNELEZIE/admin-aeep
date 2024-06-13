@@ -419,7 +419,8 @@ input[type="checkbox"][readonly] {
         <div class="app-header header sticky">
             <div class="container-fluid main-container">
                 <div class="d-flex">
-                    <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
+
+
                     <a class="logo-horizontal " href="<?=$domaine_admin?>">
                         <img src="<?=$asset?>/media/LogoAeep.png" class="header-brand-img desktop-logo" alt="logo">
                         <img src="<?=$asset?>/media/LogoAeep.png" class="header-brand-img light-logo1" alt="logo">
