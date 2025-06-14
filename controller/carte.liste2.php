@@ -4,9 +4,10 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
 
 
     $liste = $carte->getAllCarte();
+    $ran = 0;
 
     while($data = $liste->fetch()) {
-
+        $ran ++;
         if($data['statut'] == 1){
             $statut =' <span class="btn-success-light bradius mystat">Disponible</span>';
         }elseif($data['statut'] == 2){
@@ -19,29 +20,23 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
         }else{
             $pay =' <span class="btn-danger-light bradius mystat">Non</span>';
         }
-        if($data['demande'] == 1){
-            $dem =' <span class="btn-success-light bradius mystat">Nouvelle</span>';
-        }else{
-            $dem =' <span class="btn-danger-light bradius mystat">Ancienne</span>';
-        }
-        $nom = html_entity_decode(stripslashes($data['nom'])).' '.html_entity_decode(stripslashes($data['prenom'])).'<br><small>'.$data['phone'].'</small><br>'.html_entity_decode(stripslashes($data['niveau']));
 
-        if($data['photo'] == ''){
-            $imag = '';
-        }else{
-            $imag ='<img src="'.$domaine.'/uploads/'.$data['photo'].'" class="rounded-img"> ';
-        }
+        $nom = html_entity_decode(stripslashes($data['nom'])).' '.html_entity_decode(stripslashes($data['prenom'])).'
+        <br><small>'.$data['phone'].'</small><br>'.html_entity_decode(stripslashes($data['niveau']));
+        $imag ='<img src="'.$domaine.'/uploads/'.$data['photo'].'" class="rounded-img"> ';
         $action = '<a href="'.$domaine_admin.'/inscrits/'.$data['slug'].'" class="btn-info-light bradius mystat" target="_blank"> <i class="fa fa-eye"></i> voir </a>
         <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="supprimer('.$data['id_carte'].')">
                                             <span class="fe fe-trash-2"> </span>
                                         </a>
         ';
+
+
         $arr_list['data'][] = array(
-            date_time_fr($data['date_carte']),
-            $nom,
+            $ran,
+            date_fr($data['date_carte']),
             $imag,
+            $nom,
             village_name($data['village']),
-            $dem,
             $pay,
             $statut,
             $action

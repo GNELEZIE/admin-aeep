@@ -20,6 +20,8 @@ $_SESSION['myformkey'] = $token;
                                     <?php }?>
                                 </div>
                             <?php }?>
+<!--                            <div class="alert alert-info">Mise à jour en cours, veuillez patienter <i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>-->
+
                             <div class="wrap-input100 validate-input input-group" data-bs-validate="Valid email is required: ex@abc.xyz">
                                 <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                     <i class="zmdi zmdi-email text-muted" aria-hidden="true"></i>

@@ -10,10 +10,10 @@ if(isset($_SESSION['useraeep']) and isset($_POST['id'])){
   
     $delete = $carte->deleteCarte($id);
     if($delete > 0){
-        $fichier = $_SERVER['DOCUMENT_ROOT'].'/inscription.aeep-pongala.com/uploads/'.$data['photo'];
-        if(file_exists($fichier)){
-            unlink($fichier);
-        }
+//        $fichier = $_SERVER['DOCUMENT_ROOT'].'/inscription.aeep-pongala.com/uploads/'.$data['photo'];
+//        if(file_exists($fichier)){
+//            unlink($fichier);
+//        }
         echo 'ok';
     }
 }

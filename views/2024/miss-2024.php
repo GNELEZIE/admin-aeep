@@ -8,7 +8,7 @@ if(!isset($_SESSION['useraeep'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
-//require_once 'controller/note-upd.php';
+require_once 'controller/note-upd.php';
 
 if(isset($doc[0]) and !isset($doc[1])){
 
@@ -73,7 +73,7 @@ require_once 'layout/head.php'
                                                         $checked = '';
                                                         while($getRepData = $getRep->fetch()){
                                                             if($getRepData['checked'] == 1){
-                                                                if($getRepData['not_es'] == 2){
+                                                                if($getRepData['point'] == 2){
                                                                     $couleur ='color-green blod';
                                                                 }else{
                                                                     $couleur ='color-red blod';
@@ -101,12 +101,12 @@ require_once 'layout/head.php'
                                             </div>
 
                                         </div>
-
-
-
                                         <div class="row mt-3">
-                                            <div class="col-md-4 offset-4 text-center">
+                                            <div class="col-md-2 text-center mb-3">
                                                 <a href="<?=$domaine_admin?>/miss-2024" class="btn btn-primary"> <i class="fa fa-chevron-circle-left"></i> Retour </a>
+                                            </div>
+                                            <div class="col-md-2 text-center mb-3">
+                                                <a href="<?=$domaine_admin?>/result/<?=$doc[1]?>" class="btn btn-success" target="_blank"> <i class="fa fa-download"></i> Télécharger </a>
                                             </div>
                                         </div>
                                     </form>
@@ -169,6 +169,10 @@ require_once 'layout/foot.php';
                     token:"<?=$token?>"
                 }
             },
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             "ordering": false,
             "pageLength": 25,
             "language" : {

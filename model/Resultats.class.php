@@ -7,7 +7,7 @@ class Resultats {
 
     public function getNote($miss_id){
         $query = "SELECT SUM(not_es) as solde FROM resultats
-        WHERE  miss_id = :miss_id";
+        WHERE  miss_id = :miss_id AND checked = 1";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "miss_id" => $miss_id
@@ -28,7 +28,7 @@ class Resultats {
 
 
     public function getMissByQId($q_id){
-        $query = "SELECT * FROM resultats WHERE q_id = :q_id";
+        $query = "SELECT * FROM resultats WHERE q_id = :q_id AND checked  = 1";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "q_id" => $q_id
@@ -73,7 +73,7 @@ class Resultats {
     }
 
     public function getAllResult(){
-        $query = "SELECT * FROM resultats ORDER BY id_resultats DESC ";
+        $query = "SELECT * FROM resultats WHERE checked  = 1 ORDER BY id_resultats DESC ";
         $rs = $this->bdd->query($query);
         return $rs;
     }

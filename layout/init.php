@@ -7,8 +7,8 @@ include_once "function/domaine.php";
 include_once "function/mailing.php";
 include_once "function/function.php";
 //https://detectdevice.com/#php-class
-include_once "function/detectdevice/Mobile_Detect.php";
-include_once "function/detectdevice/detect.php";
+//include_once "function/detectdevice/Mobile_Detect.php";
+//include_once "function/detectdevice/detect.php";
 
 $cdn = 'cdn';
 $class = 'class';
@@ -19,16 +19,16 @@ $layout = 'layout';
 
 //Include Connexion controle/
 include_once 'model/Connexion.class.php';
-include_once 'model/Reunion.class.php';
+//include_once 'model/Reunion.class.php';
 //include_once 'controller/payer-sortie.php';
 
 // appelle des class
 include_once 'model/Admin.class.php';
 include_once 'model/Carte.class.php';
-include_once 'model/Question.class.php';
-include_once 'model/Reponse.class.php';
-include_once 'model/Miss.class.php';
-include_once 'model/Resultats.class.php';
+//include_once 'model/Question.class.php';
+//include_once 'model/Reponse.class.php';
+//include_once 'model/Miss.class.php';
+//include_once 'model/Resultats.class.php';
 
 
 

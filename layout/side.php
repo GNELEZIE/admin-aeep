@@ -6,18 +6,23 @@
     </div>
     <ul class="side-menu">
         <li class="slide">
-            <a class="side-menu__item <?php if($lien == 'miss-2024' || $lien == ''){echo 'current';} ;?>" data-bs-toggle="slide" href="<?=$domaine_admin?>/miss-2024"><i
+            <a class="side-menu__item <?php if($lien == 'dashboard' || $lien == ''){echo 'current';} ;?>" data-bs-toggle="slide" href="<?=$domaine_admin?>/dashboard"><i
                     class="side-menu__icon fe fe-home"></i><span
-                    class="side-menu__label">Miss 2024</span></a>
+                    class="side-menu__label">Membre</span></a>
         </li>
-        <li class="slide">
-            <a class="side-menu__item <?php if($lien == 'quiz' || $lien == ''){echo 'current';} ;?>" data-bs-toggle="slide" href="<?=$domaine_admin?>/quiz"><i
-                    class="side-menu__icon fe fe-home"></i><span
-                    class="side-menu__label">Quiz</span></a>
-        </li>
+<!--        <li class="slide">-->
+<!--            <a class="side-menu__item --><?php //if($lien == 'quiz' || $lien == ''){echo 'current';} ;?><!--" data-bs-toggle="slide" href="--><?//=$domaine_admin?><!--/quiz"><i-->
+<!--                    class="side-menu__icon fe fe-home"></i><span-->
+<!--                    class="side-menu__label">Quiz</span></a>-->
+<!--        </li>-->
+<!--        <li class="slide">-->
+<!--            <a class="side-menu__item --><?php //if($lien == 'carte' || $lien == ''){echo 'current';} ;?><!--" data-bs-toggle="slide" href="--><?//=$domaine_admin?><!--/carte"><i-->
+<!--                    class="side-menu__icon fe fe-user"></i><span-->
+<!--                    class="side-menu__label">Carte</span></a>-->
+<!--        </li>-->
     </ul>
-    <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
-                                                   width="24" height="24" viewBox="0 0 24 24">
+    <div class="slide-right" id="slide-right">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
             <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
         </svg></div>
 </div>

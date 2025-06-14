@@ -22,6 +22,7 @@ if(!function_exists('pourcentage')){
 if(!function_exists('village_name')){
     function village_name($villag){
         $village_nom = array(
+            "0"=> "",
             "1"=> "Blagounon",
             "2"=> "Baya",
             "3"=> "Gbalo",

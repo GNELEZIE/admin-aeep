@@ -119,37 +119,30 @@
             <tbody>
             <?php
             $qs = $resultats->getMissById_2($missData['id_miss']);
-            $n_um = 0;
+            $nq = 0;
             while($qDat_a = $qs->fetch()){
-                $n_um ++;
+                $nq ++;
                 $qData = $questions->getQById($qDat_a['q_id'])->fetch();
                 ?>
                 <tr style="margin-bottom: 15px">
                     <td>
-                        <h3><?=$n_um.' - '. html_entity_decode(stripslashes($qData['quest_t']))?></h3>
+                        <h3><?= html_entity_decode(stripslashes($qData['quest_t']))?></h3>
                         <?php
-                        $getRep = $reponses->getRepByQuId($qData['id_questions']);
+                        $getRep = $reponses->getRepByQuId2($qData['id_questions'],$missData['id_miss']);
+                        $couleur = '';
+                        $checked = '';
                         while($getRepData = $getRep->fetch()){
-
-                            $_Rep = $resultats->getMissByQId($getRepData['question_id']);
-                            $test = '';
-                            while($_Repon = $_Rep->fetch()){
-                                if($_Repon['rep_id'] == $getRepData['id_reponses']){
-                                    $_Repons = $reponses->getRepBiId($getRepData['id_reponses'])->fetch();
-                                    if($_Repons['point'] == 2){
-                                        $test .= ' <p style="color: #008000;"> - '.html_entity_decode(stripslashes($getRepData['reponse_s'])).'</p>';
-                                    }else{
-                                        $test .= ' <p style="color: red;"> - '.html_entity_decode(stripslashes($getRepData['reponse_s'])).'</p>';
-
-                                    }
+                            if($getRepData['checked'] == 1){
+                                if($getRepData['point'] == 2){
+                                    echo ' <p style="color: #008000;"> - '.html_entity_decode(stripslashes($getRepData['reponse_s'])).'</p>';
+                                }else{
+                                    echo ' <p style="color: red;"> - '.html_entity_decode(stripslashes($getRepData['reponse_s'])).'</p>';
                                 }
-
-
+                            }else{
+                                echo ' <p> - '.html_entity_decode(stripslashes($getRepData['reponse_s'])).'</p>';
                             }
-                            ?>
-                            <?=$test?>
-                        <?php
                         }
+
                         ?>
                     </td>
                 </tr>

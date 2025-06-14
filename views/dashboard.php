@@ -8,44 +8,47 @@ if(!isset($_SESSION['useraeep'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
+
 //require_once 'controller/note-upd.php';
-$nbV = $carte->getNbAllCarteValid();
-if($nbrV = $nbV->fetch()){
-    $nbrCarteValid = $nbrV['nb'] ;
-}else{
-    $nbrCarteValid = 0;
-}
-
-$nbE = $carte->getNbAllCarteEnAttent();
-if($nbrE = $nbE->fetch()){
-    $nbrCarteE = $nbrE['nb'] ;
-}else{
-    $nbrCarteE = 0;
-}
-
-$nbtotal = $carte->getNbAllCarte();
-if($nbrtto = $nbtotal->fetch()){
-    $nbrTotalCarte = $nbrtto['nb'] ;
-}else{
-    $nbrTotalCarte = 0;
-}
-$mont = 0;
-$nbtotals = $reunion->nbSortie();
-if($nbrttosortie = $nbtotals->fetch()){
-    $nbrttosorties = $nbrttosortie['nb'] ;
-    $mont = $nbrttosorties*970;
-}else{
-    $nbrttosorties = 0;
-}
-
-
-
-$nbt = $carte->getNbAllByEtatCarte();
-if($nbrt = $nbt->fetch()){
-    $nbrCarte = $nbrt['nb'] ;
-}else{
-    $nbrCarte = 0;
-}
+//
+//
+//$nbV = $carte->getNbAllCarteValid();
+//if($nbrV = $nbV->fetch()){
+//    $nbrCarteValid = $nbrV['nb'] ;
+//}else{
+//    $nbrCarteValid = 0;
+//}
+//
+//$nbE = $carte->getNbAllCarteEnAttent();
+//if($nbrE = $nbE->fetch()){
+//    $nbrCarteE = $nbrE['nb'] ;
+//}else{
+//    $nbrCarteE = 0;
+//}
+//
+//$nbtotal = $carte->getNbAllCarte();
+//if($nbrtto = $nbtotal->fetch()){
+//    $nbrTotalCarte = $nbrtto['nb'] ;
+//}else{
+//    $nbrTotalCarte = 0;
+//}
+//$mont = 0;
+//$nbtotals = $reunion->nbSortie();
+//if($nbrttosortie = $nbtotals->fetch()){
+//    $nbrttosorties = $nbrttosortie['nb'] ;
+//    $mont = $nbrttosorties*970;
+//}else{
+//    $nbrttosorties = 0;
+//}
+//
+//
+//
+//$nbt = $carte->getNbAllByEtatCarte();
+//if($nbrt = $nbt->fetch()){
+//    $nbrCarte = $nbrt['nb'] ;
+//}else{
+//    $nbrCarte = 0;
+//}
 //include_once $controller.'/payer-sortie.php';
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
@@ -62,19 +65,20 @@ require_once 'layout/head.php';
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="fw-semibold"><b>Concours miss AEEP 2024</b></h3>
+                            <h3 class="fw-semibold"><b>Les membres inscrits </b></h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table text-nowrap border-bottom" id="tableMiss">
                                     <thead>
                                     <tr class="border-bottom">
-                                        <th class="wd-15p">Rang</th>
                                         <th class="wd-15p">Date</th>
                                         <th class="wd-15p">Nom & Prénom</th>
-                                        <th class="wd-15p">Téléphone</th>
+                                        <th class="wd-15p">Photo</th>
                                         <th class="wd-15p">Village</th>
-                                        <th class="wd-15p">Note</th>
+                                        <th class="wd-15p">Type</th>
+                                        <th class="wd-15p">Payer</th>
+                                        <th class="wd-15p">Statut</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                     </thead>
@@ -108,7 +112,7 @@ require_once 'layout/foot.php';
         tableMiss = $('#tableMiss').DataTable({
             "ajax":{
                 "type":"post",
-                "url":"<?=$domaine_admin?>/controle/miss-liste",
+                "url":"<?=$domaine_admin?>/controle/carte.liste",
                 "data":{
                     token:"<?=$token?>"
                 }
@@ -144,8 +148,8 @@ require_once 'layout/foot.php';
     function supprimer(id = null){
         if(id){
             swal({
-                    title: "Voulez vous supprimer la candidate ?",
-                    text: "L'action va supprimer la candidate sélectionnée",
+                    title: "Voulez vous supprimer le membre ?",
+                    text: "L'action va supprimer le membre sélectionné",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -156,7 +160,7 @@ require_once 'layout/foot.php';
 
                 function(isConfirm){
                     if (isConfirm) {
-                        $.post('<?=$domaine_admin?>/controle/miss.delete', {id : id}, function (data) {
+                        $.post('<?=$domaine_admin?>/controle/carte.delete', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Suppression effectuée avec succès!","", "success");
                                 tableMiss.ajax.reload(null,false);

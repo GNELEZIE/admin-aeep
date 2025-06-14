@@ -7,7 +7,7 @@ use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
 try {
     ob_start();
-    include dirname(__FILE__).'/../controller/miss.pdf.php';
+    include dirname(__FILE__) . '/../controller/miss.pdf.php';
     $content = ob_get_clean();
 
     $html2pdf = new Html2Pdf('P', 'A4', 'fr');

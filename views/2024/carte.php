@@ -8,6 +8,7 @@ if(!isset($_SESSION['useraeep'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
+include_once $controller.'/payer-sortie.php';
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
@@ -73,6 +74,10 @@ require_once 'layout/foot.php';
                     token:"<?=$token?>"
                 }
             },
+            dom: 'Bfrtip',
+            buttons: [
+                'pdf'
+            ],
             "ordering": false,
             "pageLength": 10,
             "language" : {

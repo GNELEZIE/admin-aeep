@@ -22,7 +22,7 @@ if(isset($doc[1]) and !isset($doc[2])){
     exit();
 }
 
-//require_once 'controller/refuser-carte.php';
+require_once 'controller/refuser-carte.php';
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;

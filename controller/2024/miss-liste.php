@@ -32,7 +32,7 @@ if(isset($_SESSION['useraeep']) and isset($_SESSION['myformkey']) and isset($_PO
 
         $arr_list['data'][] = array(
             $nb,
-            date_fr($data['date_miss']),
+            date_time_fr($data['date_miss']),
             html_entity_decode(stripslashes($data['nom'])),
             html_entity_decode(stripslashes($data['phone'])),
             village_name($data['village']),
